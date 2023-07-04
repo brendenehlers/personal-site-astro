@@ -17,8 +17,8 @@ const publishedPosts = (await getCollection("posts")).filter(post => post.data.i
   <main class="flex flex-col gap-20">
     <article class="flex flex-col gap-8">
       <h1 class="text-3xl text-neutral-100">{presentation.title}</h1>
-      <h2
-        class="max-w-[60ch] leading-6"
+      <p
+        class="max-w-[60ch] leading-6 text-white"
         set:html={presentation.description}
       />
       <SocialLinks />
@@ -26,9 +26,9 @@ const publishedPosts = (await getCollection("posts")).filter(post => post.data.i
 
     {projects.length > 0 && <article class="flex flex-col gap-8">
       <header class="flex w-full flex-row justify-between gap-2">
-        <h3 class="text-lg text-neutral-100">
+        <h2 class="text-lg text-neutral-100">
           Projects
-        </h3>
+        </h2>
       </header>
 
       <section class="flex flex-col gap-4">
@@ -41,7 +41,7 @@ const publishedPosts = (await getCollection("posts")).filter(post => post.data.i
 
     {publishedPosts.length > 0 && <article class="flex flex-col gap-8">
       <header class="flex w-full flex-row justify-between gap-2">
-        <h3 class="text-lg text-neutral-100">Latest posts</h3>
+        <h2 class="text-lg text-neutral-100">Latest posts</h2>
         <Link href="/posts" label="See all posts" isUnderline target="_self" />
       </header>
 
