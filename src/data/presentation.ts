@@ -25,6 +25,6 @@ const presentation: Presentation = {
       link: "https://github.com/brendenehlers",
     },
   ],
-};
+}
 
 export default presentation;
