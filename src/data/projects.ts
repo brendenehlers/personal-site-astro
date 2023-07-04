@@ -1,25 +1,17 @@
 export type Project = {
-  title: string;
-  techs: string[];
-  link: string;
-  isComingSoon?: boolean;
-};
+  title: string
+  techs: string[]
+  link: string
+  description: string
+  isComingSoon?: boolean
+}
 
 const projects: Project[] = [
   {
-    title: "Dictionary App",
-    techs: ["ReactJS (NextJS)", "react-query", "zod"],
+    title: "Project Whitefish",
+    techs: ["ReactJS", "Supabase"],
     link: "https://github.com/MaeWolff/dictionary-app",
-  },
-  {
-    title: "Portfolio / Lina BLIDI",
-    techs: ["ReactJS (NextJS)", "TypeScript"],
-    link: "https://www.linablidi.fr/",
-  },
-  {
-    title: "Portfolio / Template",
-    techs: ["Astro"],
-    link: "/",
+    description: "A time slot management app designed to help groups organize their events.",
     isComingSoon: true,
   },
 ];

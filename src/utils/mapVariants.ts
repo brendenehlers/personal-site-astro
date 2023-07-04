@@ -2,6 +2,7 @@ import type { TailwindColor } from "./types/tailwind";
 
 const MAP_COLOR_VARIANT_TO_BG: Record<TailwindColor, string> = {
   orange: "bg-orange-500",
+  lightorange: "bg-orange-300",
   violet: "bg-violet-500",
   red: "bg-red-500",
   amber: "bg-amber-500",
@@ -21,6 +22,7 @@ const MAP_COLOR_VARIANT_TO_BG: Record<TailwindColor, string> = {
 
 const MAP_COLOR_VARIANT_TO_TEXT: Record<TailwindColor, string> = {
   orange: "text-orange-500",
+  lightorange: "text-orange-300",
   violet: "text-violet-500",
   red: "text-red-500",
   amber: "text-amber-500",

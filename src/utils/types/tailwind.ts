@@ -1,5 +1,6 @@
 export type TailwindColor =
   | "orange"
+  | "lightorange"
   | "violet"
   | "red"
   | "amber"

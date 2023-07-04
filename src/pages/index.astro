@@ -11,51 +11,26 @@ import convertAsteriskToStrongTag from "@/utils/convertAsteriskToStrongTag";
 import presentation from "@/data/presentation";
 import projects from "@/data/projects";
 
-const posts = await getCollection("posts");
+const publishedPosts = (await getCollection("posts")).filter(post => post.data.isPublish)
 ---
 
-<Layout>
+<Layout title="Brenden Ehlers">
   <main class="flex flex-col gap-20">
     <article class="flex flex-col gap-8">
       <h1 class="text-3xl text-neutral-100">{presentation.title}</h1>
       <h2
         class="max-w-[60ch] leading-6"
-        set:html={convertAsteriskToStrongTag(presentation.description)}
+        set:html={presentation.description}
       />
       <SocialLinks />
     </article>
 
-    <article class="flex flex-col gap-8">
-      <header class="flex w-full flex-row justify-between gap-2">
-        <h3 class="text-lg text-neutral-100">Latest posts</h3>
-        <Link href="/posts" label="See all posts" isUnderline target="_self" />
-      </header>
-      {posts.length === 0 && <p>Soon, stay connected 👀...</p>}
-
-      <section class="flex flex-col gap-4 md:flex-row md:flex-wrap">
-        {
-          posts.length !== 0 &&
-            posts
-              .slice(0, 2)
-              .map((post) => (
-                <PostCard
-                  publishedAt={post.data.publishedAt}
-                  title={post.data.title}
-                  description={post.data.description}
-                  slug={post.slug}
-                />
-              ))
-        }
-      </section>
-    </article>
-
-    <article class="flex flex-col gap-8">
+    {projects.length > 0 && <article class="flex flex-col gap-8">
       <header class="flex w-full flex-row justify-between gap-2">
         <h3 class="text-lg text-neutral-100">
-          Selected projects ({projects.length})
+          Projects
         </h3>
       </header>
-      {projects.length === 0 && <p>Oops, I must work^^^^^</p>}
 
       <section class="flex flex-col gap-4">
         {
@@ -63,7 +38,29 @@ const posts = await getCollection("posts");
             projects.map((project) => <ProjectCard {...project} />)
         }
       </section>
-    </article>
+    </article>}
+
+    {publishedPosts.length > 0 && <article class="flex flex-col gap-8">
+      <header class="flex w-full flex-row justify-between gap-2">
+        <h3 class="text-lg text-neutral-100">Latest posts</h3>
+        <Link href="/posts" label="See all posts" isUnderline target="_self" />
+      </header>
+
+      <section class="flex flex-col gap-4 md:flex-row md:flex-wrap">
+        {
+          publishedPosts
+            .slice(0, 2)
+            .map((post) => (
+              <PostCard
+                publishedAt={post.data.publishedAt}
+                title={post.data.title}
+                description={post.data.description}
+                slug={post.slug}
+              />
+            ))
+        }
+      </section>
+    </article>}
 
     <article class="flex flex-col gap-8">
       <header class="flex w-full flex-row justify-between gap-2">

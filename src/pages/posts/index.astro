@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import formatDate from "@/utils/formatDate";
 
-const posts = await getCollection("posts");
+const publishedPosts = (await getCollection("posts")).filter(post => post.data.isPublish)
 ---
 
 <Layout title="Template - All Posts">
@@ -12,7 +12,8 @@ const posts = await getCollection("posts");
 
     <article class="flex flex-col gap-4">
       {
-        posts.map((post) => (
+        publishedPosts.length > 0 ?
+        publishedPosts.map((post) => (
           <a
             class="group flex flex-col gap-2 border-t border-neutral-700 py-4 transition-all hover:text-neutral-100"
             href={`/posts/${post.slug}`}
@@ -47,6 +48,7 @@ const posts = await getCollection("posts");
             <p>{post.data.description}</p>
           </a>
         ))
+      : <p>Soon, stay connected 👀...</p>
       }
     </article>
   </main>
