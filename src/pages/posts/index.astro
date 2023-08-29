@@ -1,9 +1,24 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import formatDate from "@/utils/formatDate";
+import { getCollection } from "astro:content"
+import Layout from "@/layouts/Layout.astro"
+import formatDate from "@/utils/formatDate"
+import { contentfulClient } from "@/lib/contentful"
+import type { BlogPost } from "@/lib/contentful"
 
-const publishedPosts = (await getCollection("posts")).filter(post => post.data.isPublish)
+// const publishedPosts = (await getCollection("posts")).filter(post => post.data.isPublish)
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+})
+
+const publishedPosts = entries.items.map((item) => {
+  const { title, date, description, slug } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+    date: new Date(date)
+  }
+}).filter(post => post.date <= new Date())
 ---
 
 <Layout title="Template - All Posts">
@@ -19,10 +34,10 @@ const publishedPosts = (await getCollection("posts")).filter(post => post.data.i
             href={`/posts/${post.slug}`}
           >
             <div class="flex w-full items-center justify-between">
-              <h2 class="text-lg">{post.data.title}</h2>
+              <h2 class="text-lg">{post.title}</h2>
 
               <div class="flex flex-row items-center gap-4">
-                <p>{formatDate(post.data.publishedAt)}</p>
+                <p>{formatDate(post.date)}</p>
                 <svg
                   width="18"
                   height="18"
@@ -45,7 +60,7 @@ const publishedPosts = (await getCollection("posts")).filter(post => post.data.i
                 </svg>
               </div>
             </div>
-            <p>{post.data.description}</p>
+            <p>{post.description}</p>
           </a>
         ))
       : <p>Soon, stay connected 👀...</p>

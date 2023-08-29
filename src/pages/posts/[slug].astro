@@ -1,34 +1,42 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import formatDate from "@/utils/formatDate";
+import { contentfulClient } from "@/lib/contentful"
+import type { BlogPost } from "@/lib/contentful"
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
+import type { CollectionEntry } from "astro:content"
+import Layout from "@/layouts/Layout.astro"
+import formatDate from "@/utils/formatDate"
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+  const entries = await contentfulClient.getEntries<BlogPost>({
+    content_type: "blogPost",
+  }) 
 
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
+  const pages = entries.items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: documentToHtmlString(item.fields.content),
+      date: new Date(item.fields.date).toLocaleDateString(),
+    },
   }));
+  return pages;
 }
 
 type Props = {
-  post: CollectionEntry<"posts">;
-};
+  content: string
+  title: string
+  date: string 
+}
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const { content, title, date } = Astro.props
 ---
 
-<Layout title={post.data.title}>
+<Layout title={title}>
   <main class="post mx-auto flex w-full max-w-prose flex-col gap-4">
     <header role="presentation">
-      <h1 class="text-md">
-        {post.data.title} - {formatDate(post.data.publishedAt)}
-      </h1>
-      <p class="italic">{post.data.description}</p>
+      <h1 class="text-xl font-bold">{title}</h1>
+      <p>{date}</p>
     </header>
-
-    <Content />
+    <article class="prose" set:html={content} />
   </main>
 </Layout>
