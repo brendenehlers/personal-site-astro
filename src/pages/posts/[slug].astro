@@ -32,11 +32,11 @@ const { content, title, date } = Astro.props
 ---
 
 <Layout title={title}>
-  <main class="post mx-auto flex w-full max-w-prose flex-col gap-4">
+  <main class="post mx-auto flex w-full max-w-prose flex-col gap-2">
     <header role="presentation">
-      <h1 class="text-xl font-bold">{title}</h1>
-      <p>{date}</p>
+      <h1 class="text-3xl font-bold">{title}</h1>
+      <p class="m-0">{date}</p>
     </header>
-    <article class="prose" set:html={content} />
+    <article set:html={content} />
   </main>
 </Layout>
