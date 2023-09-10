@@ -2,9 +2,7 @@
 import { contentfulClient } from "@/lib/contentful"
 import type { BlogPost } from "@/lib/contentful"
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
-import type { CollectionEntry } from "astro:content"
 import Layout from "@/layouts/Layout.astro"
-import formatDate from "@/utils/formatDate"
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<BlogPost>({
