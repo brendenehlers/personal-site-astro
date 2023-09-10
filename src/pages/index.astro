@@ -7,8 +7,8 @@ import Link from "@/components/shared/Link.astro"
 import { contentfulClient } from "@/lib/contentful"
 import type { BlogPost } from "@/lib/contentful"
 
-import presentation from "@/data/presentation";
-import projects from "@/data/projects";
+import presentation from "@/data/presentation"
+import projects from "@/data/projects"
 
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: "blogPost",
