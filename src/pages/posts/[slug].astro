@@ -1,13 +1,13 @@
 ---
-import { contentfulClient } from "@/lib/contentful"
-import type { BlogPost } from "@/lib/contentful"
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer"
-import Layout from "@/layouts/Layout.astro"
+import { contentfulClient } from '@/lib/contentful'
+import type { BlogPost, Reference } from '@/lib/contentful'
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import Layout from '@/layouts/Layout.astro'
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<BlogPost>({
-    content_type: "blogPost",
-  }) 
+    content_type: 'blogPost',
+  })
 
   const pages = entries.items.map((item) => ({
     params: { slug: item.fields.slug },
@@ -15,26 +15,41 @@ export async function getStaticPaths() {
       title: item.fields.title,
       content: documentToHtmlString(item.fields.content),
       date: new Date(item.fields.date).toLocaleDateString(),
+      references: item.fields.references.references,
     },
-  }));
-  return pages;
+  }))
+  return pages
 }
 
 type Props = {
   content: string
   title: string
-  date: string 
+  date: string
+  references: Reference[]
 }
 
-const { content, title, date } = Astro.props
+const { content, title, date, references } = Astro.props
 ---
 
 <Layout title={title}>
-  <main class="post mx-auto flex w-full max-w-prose flex-col gap-2">
-    <header role="presentation">
-      <h1 class="text-3xl font-bold">{title}</h1>
-      <p class="m-0">{date}</p>
+  <main class='post mx-auto flex w-full max-w-prose flex-col gap-2'>
+    <header role='presentation'>
+      <p>{date}</p>
+      <h1>{title}</h1>
+      <hr class='border-border-light' style='margin-block-start: 0;' />
     </header>
     <article set:html={content} />
+    <footer>
+      <h2>More reading:</h2>
+      <ul>
+        {
+          references?.map((reference) => (
+            <li>
+              <a href={reference.link}>{reference.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </footer>
   </main>
 </Layout>

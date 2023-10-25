@@ -8,12 +8,12 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    title: "Project Whitefish",
+    title: "Joyner",
     techs: ["ReactJS", "Supabase"],
-    link: "https://github.com/MaeWolff/dictionary-app",
+    link: "",
     description: "A time slot management app designed to help groups organize their events.",
     isComingSoon: true,
   },
-];
+]
 
-export default projects;
+export default projects

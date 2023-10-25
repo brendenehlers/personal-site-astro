@@ -1,21 +1,21 @@
 .post p {
-  @apply leading-7 mb-3;
+  @apply mb-3 mt-2 text-text;
 }
 
 .post code {
-  @apply rounded-sm bg-neutral-800 px-1 py-[2px] text-orange-500;
+  @apply rounded-sm bg-neutral-800 px-1 py-[2px] text-code;
 }
 
 .post h1 {
-  @apply mt-6 mb-3 text-3xl text-neutral-100;
+  @apply mb-3 mt-6 text-3xl font-bold text-text;
 }
 
 .post h2 {
-  @apply mt-6 mb-3 text-2xl text-neutral-100;
+  @apply mb-3 mt-6 text-2xl text-text;
 }
 
 .post h3 {
-  @apply mt-4 mb-3 text-xl text-neutral-100;
+  @apply mb-3 mt-4 text-xl text-text;
 }
 
 .post code {
@@ -23,11 +23,15 @@
 }
 
 .post a {
-  @apply text-neutral-100 underline;
+  @apply text-link no-underline hover:text-link-hover;
 }
 
 .post ul {
   @apply list-disc;
+}
+
+.post li {
+  @apply mb-2 list-none;
 }
 
 .post blockquote {

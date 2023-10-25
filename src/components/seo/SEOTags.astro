@@ -1,40 +1,40 @@
 ---
-import { SEO } from "astro-seo";
-import { SITE_URL } from "@/data/config";
+import { SEO } from 'astro-seo'
+import { SITE_URL } from '@/data/config'
 
 type Props = {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
+  title?: string
+  description?: string
+  noindex?: boolean
   og?: {
-    title: string;
-    type: string;
-    description: string;
-    image: string;
-    alt: string;
-  };
-};
+    title: string
+    type: string
+    description: string
+    image: string
+    alt: string
+  }
+}
 
-const { title, description, noindex, og } = Astro.props;
+const { title, description, noindex, og } = Astro.props
 
-const DEFAULT_TITLE_PAGE = "Astro - Portfolio template";
+const DEFAULT_TITLE_PAGE = 'Brenden Ehlers'
 const DEFAULT_DESCRIPTION_PAGE =
-  "A minimal portfolio template built with Astro and Tailwindcss.";
-const DEFAULT_URL_SITE = SITE_URL;
+  'Brenden Ehlers is a software engineer based in the United States.'
+const DEFAULT_URL_SITE = SITE_URL
 
 const openGraph = {
   title: og?.title || DEFAULT_TITLE_PAGE,
-  type: og?.type || "website",
-  image: og?.image || "/opengraph-image.jpg",
-  alt: og?.alt || "astro portfolio template image",
+  type: og?.type || 'website',
+  image: og?.image || '/opengraph-image.png',
+  alt: og?.alt || 'Brenden Ehlers',
   url: DEFAULT_URL_SITE,
   description: og?.description || DEFAULT_DESCRIPTION_PAGE,
-};
+}
 ---
 
 <head>
   <SEO
-    charset="UTF-8"
+    charset='UTF-8'
     title={title || DEFAULT_TITLE_PAGE}
     description={description || DEFAULT_DESCRIPTION_PAGE}
     noindex={noindex || false}
@@ -49,24 +49,24 @@ const openGraph = {
       },
     }}
     twitter={{
-      creator: "@itsstormzz_",
+      creator: '@brendenehlers',
     }}
     extend={{
       link: [
-        { rel: "icon", href: "/favicon.svg" },
-        { rel: "sitemap", href: "/sitemap-index.xml" },
+        { rel: 'icon', href: '/favicon.svg' },
+        { rel: 'sitemap', href: '/sitemap-index.xml' },
       ],
       meta: [
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "generator", content: Astro.generator },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'generator', content: Astro.generator },
         {
-          name: "twitter:image",
+          name: 'twitter:image',
           content: openGraph.image,
         },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: openGraph.title },
-        { name: "twitter:description", content: openGraph.description },
-        { name: "twitter:site", content: "@itsstormzz_" },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: openGraph.title },
+        { name: 'twitter:description', content: openGraph.description },
+        { name: 'twitter:site', content: '@brendenehlers' },
       ],
     }}
   />
