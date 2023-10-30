@@ -3,7 +3,7 @@ import { contentfulClient } from '@/lib/contentful'
 import type { BlogPost } from '@/lib/contentful'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import Layout from '@/layouts/Layout.astro'
-import { parseMarkdown } from '@/utils/utils'
+import { formatDate, parseMarkdown } from '@/utils/utils'
 
 export async function getStaticPaths() {
   const entries = await contentfulClient.getEntries<BlogPost>({
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     props: {
       title: item.fields.title,
       content: documentToHtmlString(item.fields.content),
-      date: new Date(item.fields.date).toLocaleDateString(),
+      date: formatDate(new Date(item.fields.date)),
       postContent: parseMarkdown(item.fields.postContent),
     },
   }))

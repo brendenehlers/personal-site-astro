@@ -15,7 +15,7 @@ export function convertAsteriskToStrongTag(str: string) {
 }
 
 export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat('en-US').format(date)
+  return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date)
 }
 
 export function removeTrailingSlash(pathname: string) {
