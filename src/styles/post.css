@@ -17,10 +17,6 @@
 .post h3 {
   @apply mb-3 mt-4 text-xl text-text;
 }
-/* 
-.post code {
-  @apply m-2 w-screen p-4;
-} */
 
 .post a {
   @apply text-link no-underline hover:text-link-hover;
@@ -39,9 +35,9 @@
 }
 
 .post pre {
+  @apply mx-4 my-2;
   background: #303030;
   color: #f1f1f1;
-  padding: 10px 16px;
   border-radius: 2px;
   -moz-box-shadow: inset 0 0 10px #000;
   box-shadow: inset 0 0 10px #000;
@@ -49,17 +45,14 @@
 }
 
 .post pre > span {
-  display: block;
+  @apply block;
   line-height: 1.5rem;
 }
 
 .post pre > span::before {
+  @apply mr-2 inline-block w-10 px-2;
   counter-increment: line;
   content: counter(line);
-  display: inline-block;
   border-right: 1px solid #ddd;
-  padding: 0 0.5em;
-  margin-right: 0.5em;
   color: #888;
-  width: 2.5rem;
 }

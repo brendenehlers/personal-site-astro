@@ -1,6 +1,6 @@
 import theme from '@/data/theme'
 import { MAP_COLOR_VARIANT_TO_TEXT } from './types/tailwind'
-import { sanitize } from 'isomorphic-dompurify'
+import pkg from 'isomorphic-dompurify'
 import { marked } from 'marked'
 import type { RendererObject } from 'MarkedOptions'
 import hljs from 'highlight.js/lib/common' 
@@ -26,6 +26,7 @@ export function removeTrailingSlash(pathname: string) {
 
 export function parseMarkdown(markdown: string) {
 	if (markdown == null || markdown == '') return ''
+	const { sanitize } = pkg
 
 	// TODO implement copy button	
 	const renderer: RendererObject = {
