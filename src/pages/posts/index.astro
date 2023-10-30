@@ -1,23 +1,21 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { formatDate } from '@/utils/formatDate'
+import { formatDate } from '@/utils/utils'
 import { contentfulClient } from '@/lib/contentful'
 import type { BlogPost } from '@/lib/contentful'
 
-// const publishedPosts = (await getCollection("posts")).filter(post => post.data.isPublish)
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: 'blogPost',
 })
 
 const publishedPosts = entries.items
   .map((item) => {
-    const { title, date, description, slug, references } = item.fields
+    const { title, date, description, slug } = item.fields
     return {
       title,
       slug,
       description,
       date: new Date(date),
-      references: references?.references,
     }
   })
   .filter((post) => post.date <= new Date())

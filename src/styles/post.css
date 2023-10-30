@@ -17,10 +17,10 @@
 .post h3 {
   @apply mb-3 mt-4 text-xl text-text;
 }
-
+/* 
 .post code {
-  @apply rounded-sm bg-neutral-800 px-1 py-[2px] text-red-500;
-}
+  @apply m-2 w-screen p-4;
+} */
 
 .post a {
   @apply text-link no-underline hover:text-link-hover;
@@ -39,9 +39,27 @@
 }
 
 .post pre {
-  @apply p-4;
+  background: #303030;
+  color: #f1f1f1;
+  padding: 10px 16px;
+  border-radius: 2px;
+  -moz-box-shadow: inset 0 0 10px #000;
+  box-shadow: inset 0 0 10px #000;
+  counter-reset: line;
 }
 
-.post pre > code {
-  @apply bg-transparent;
+.post pre > span {
+  display: block;
+  line-height: 1.5rem;
+}
+
+.post pre > span::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  border-right: 1px solid #ddd;
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+  color: #888;
+  width: 2.5rem;
 }
