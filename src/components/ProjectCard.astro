@@ -12,7 +12,7 @@ const formatTechs = (values: string[]) =>
 <>
   {
     isComingSoon && (
-      <div class='t group flex w-full flex-col justify-between gap-2 rounded-md border border-border bg-card-background p-4 md:items-center'>
+      <div class='t card-shadow group flex w-full flex-col justify-between gap-2 rounded-md border border-border bg-card-background p-4 md:items-center'>
         <div class='mb-3 flex w-full flex-col gap-2 md:mb-0 md:flex-row md:items-center md:gap-4'>
           <p class='font-semibold'>{title}</p>
           <p class='text-text-light'>{formatTechs(techs)}</p>
@@ -26,7 +26,7 @@ const formatTechs = (values: string[]) =>
   {
     !isComingSoon && (
       <a
-        class='group flex w-full cursor-pointer flex-col justify-between gap-2 rounded-md border border-border bg-card-background p-4 transition-all duration-300 hover:-translate-y-2 hover:border-neutral-400 md:flex-row md:items-center'
+        class='card-shadow group flex w-full cursor-pointer flex-col justify-between gap-2 rounded-md border border-border bg-card-background p-4 transition-all duration-300 hover:-translate-y-2 hover:border-neutral-400 md:flex-row md:items-center'
         href={link}
         target='_blank'
         rel='noreferrer'
