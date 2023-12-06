@@ -6,39 +6,39 @@ import Layout from '@/layouts/Layout.astro'
 import { formatDate, parseMarkdown } from '@/utils/utils'
 
 export async function getStaticPaths() {
-  const entries = await contentfulClient.getEntries<BlogPost>({
-    content_type: 'blogPost',
-  })
+	const entries = await contentfulClient.getEntries<BlogPost>({
+		content_type: 'blogPost',
+	})
 
-  const pages = entries.items.map((item) => ({
-    params: { slug: item.fields.slug },
-    props: {
-      title: item.fields.title,
-      content: documentToHtmlString(item.fields.content),
-      date: formatDate(new Date(item.fields.date)),
-      postContent: parseMarkdown(item.fields.postContent),
-    },
-  }))
-  return pages
+	const pages = entries.items.map((item) => ({
+		params: { slug: item.fields.slug },
+		props: {
+			title: item.fields.title,
+			content: documentToHtmlString(item.fields.content),
+			date: formatDate(new Date(item.fields.date)),
+			postContent: parseMarkdown(item.fields.postContent),
+		},
+	}))
+	return pages
 }
 
 type Props = {
-  content: string
-  title: string
-  date: string,
-  postContent: string
+	content: string
+	title: string
+	date: string
+	postContent: string
 }
 
 const { title, date, postContent } = Astro.props
 ---
 
 <Layout title={title}>
-  <main class='post mx-auto flex w-full max-w-prose flex-col gap-2'>
-    <header role='presentation'>
-      <p>{date}</p>
-      <h1>{title}</h1>
-      <hr class='border-border-light' style='margin-block-start: 0;' />
-    </header>
-    <article set:html={postContent} />
-  </main>
+	<main class='post max-w-6/12 mx-auto flex w-full flex-col gap-2'>
+		<header role='presentation'>
+			<p>{date}</p>
+			<h1>{title}</h1>
+			<hr class='border-border-light' style='margin-block-start: 0;' />
+		</header>
+		<article set:html={postContent} />
+	</main>
 </Layout>

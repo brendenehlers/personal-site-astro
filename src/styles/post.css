@@ -1,59 +1,60 @@
 .post p {
-  @apply mb-3 mt-2 text-text;
+	@apply mb-3 mt-2 text-text;
 }
 
 .post code {
-  @apply rounded-sm bg-neutral-800 px-1 py-[2px] text-code;
+	@apply rounded-sm text-code;
+	font-family: 'IBM Plex Mono', monospace;
 }
 
 .post h1 {
-  @apply mb-3 mt-6 text-3xl font-bold text-text;
+	@apply mb-3 mt-6 text-3xl font-bold text-text;
 }
 
 .post h2 {
-  @apply mb-3 mt-6 text-2xl text-text;
+	@apply mb-3 mt-6 text-2xl text-text;
 }
 
 .post h3 {
-  @apply mb-3 mt-4 text-xl text-text;
+	@apply mb-3 mt-4 text-xl text-text;
 }
 
 .post a {
-  @apply text-link no-underline hover:text-link-hover;
+	@apply text-link no-underline hover:text-link-hover;
 }
 
 .post ul {
-  @apply list-disc;
+	@apply list-disc;
 }
 
 .post li {
-  @apply mb-2 list-none;
+	@apply mb-2 list-none;
 }
 
 .post blockquote {
-  @apply flex flex-row gap-2 before:block before:h-auto before:w-1 before:max-w-[1px] before:bg-red-400 before:content-[''];
+	@apply flex flex-row gap-2 before:block before:h-auto before:w-1 before:max-w-[1px] before:bg-red-400 before:content-[''];
 }
 
 .post pre {
-  @apply mx-4 my-2;
-  background: #303030;
-  color: #f1f1f1;
-  border-radius: 2px;
-  -moz-box-shadow: inset 0 0 10px #000;
-  box-shadow: inset 0 0 10px #000;
-  counter-reset: line;
-  overflow-x: scroll;
+	@apply mx-4 my-2 p-2;
+	background: #303030;
+	color: #f1f1f1;
+	border-radius: 2px;
+	-moz-box-shadow: inset 0 0 10px #000;
+	box-shadow: inset 0 0 10px #000;
+	counter-reset: line;
+	overflow-x: scroll;
 }
 
 .post pre > span {
-  @apply block;
-  line-height: 1.5rem;
+	@apply block;
+	line-height: 1.5rem;
 }
 
 .post pre > span::before {
-  @apply mr-2 inline-block w-10 px-2;
-  counter-increment: line;
-  content: counter(line);
-  border-right: 1px solid #ddd;
-  color: #888;
+	@apply mr-2 inline-block w-10 px-2;
+	counter-increment: line;
+	content: counter(line);
+	border-right: 1px solid #ddd;
+	color: #888;
 }
