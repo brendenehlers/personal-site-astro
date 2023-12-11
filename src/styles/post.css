@@ -1,9 +1,9 @@
 .post p {
-	@apply mb-3 mt-2 text-text;
+	@apply mb-3 mt-2 text-base text-text;
 }
 
 .post code {
-	@apply rounded-sm text-code;
+	@apply rounded-sm bg-slate-200 text-slate-800;
 	font-family: 'IBM Plex Mono', monospace;
 }
 

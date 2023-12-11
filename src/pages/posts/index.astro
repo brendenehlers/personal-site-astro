@@ -8,17 +8,15 @@ const entries = await contentfulClient.getEntries<BlogPost>({
 	content_type: 'blogPost',
 })
 
-const publishedPosts = entries.items
-	.map((item) => {
-		const { title, date, description, slug } = item.fields
-		return {
-			title,
-			slug,
-			description,
-			date: new Date(date),
-		}
-	})
-	.filter((post) => post.date <= new Date())
+const publishedPosts = entries.items.map((item) => {
+	const { title, date, description, slug } = item.fields
+	return {
+		title,
+		slug,
+		description,
+		date: new Date(date),
+	}
+})
 ---
 
 <Layout title='Posts'>
