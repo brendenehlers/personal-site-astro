@@ -1,0 +1,16 @@
+{
+	"name": "brenden-ehlers-portfolio",
+	"short_name": "Brenden Ehlers Portfolio",
+	"description": "The personal website for Brenden Ehlers, a full stack software engineer",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#FBF5F3",
+	"theme_color": "#7F7979",
+	"icons": [
+		{
+			"src": "/favicon.svg",
+			"sizes": "128x128",
+			"type": "image/svg+xml"
+		}
+	]
+}
