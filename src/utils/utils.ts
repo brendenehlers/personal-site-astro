@@ -32,13 +32,10 @@ export function parseMarkdown(markdown: string) {
 	const renderer: RendererObject = {
 		code(code: string, infostring: string | undefined, escaped: boolean) {
 
-			let newCode = code
-			if (infostring) {
-				newCode = hljs.highlightAuto(newCode).value
-			} else {
-				newCode = hljs.highlight(newCode, {language: 'plaintext'}).value
-			}
+			// get highlighted code
+			let newCode = hljs.highlight(code, { language: infostring || 'plaintext' }).value
 
+			// put code into one element so it's all on the same line
 			newCode = newCode.split('\n').map((line) => (
 				`<span>${line}</span>`					
 			)).join('')

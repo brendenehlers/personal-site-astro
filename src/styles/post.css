@@ -21,7 +21,7 @@
 }
 
 .post a {
-	@apply text-link no-underline hover:text-link-hover;
+	@apply text-link underline hover:text-link-hover;
 }
 
 .post ul {
@@ -38,7 +38,7 @@
 
 .post pre {
 	@apply mx-4 my-2 p-2;
-	background: #303030;
+	background: #202020;
 	color: #f1f1f1;
 	border-radius: 2px;
 	-moz-box-shadow: inset 0 0 10px #000;
