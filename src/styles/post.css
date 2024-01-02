@@ -3,8 +3,9 @@
 }
 
 .post code {
-	@apply rounded-sm bg-slate-200 text-slate-800;
-	font-family: 'IBM Plex Mono', monospace;
+	@apply rounded-sm bg-slate-200 p-0.5 text-sm text-slate-800;
+	font-family: monospace;
+	vertical-align: text-bottom;
 }
 
 .post h1 {
