@@ -6,6 +6,7 @@ import '@fontsource/open-sans'
 import '@/styles/tailwind.css'
 import '@/styles/post.css'
 import '@/styles/global.css'
+import '@/styles/atom-one-dark.css'
 
 export interface Props {
 	title?: string
@@ -32,10 +33,6 @@ const { title } = Astro.props
 		</script>
 		<!-- END Google tag -->
 		<SEOTags title={title} />
-		<link
-			rel='stylesheet'
-			href='https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/atom-one-dark.min.css'
-		/>
 	</head>
 
 	<body
