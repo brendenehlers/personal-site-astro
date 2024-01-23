@@ -7,14 +7,14 @@ import Link from '@/components/shared/Link.astro'
 import { contentfulClient } from '@/lib/contentful'
 import presentation from '@/data/presentation'
 import projects from '@/data/projects'
-
 import type { BlogPost } from '@/lib/contentful'
+import CurrentlyReadingCard from '@/components/CurrentlyReadingCard.astro'
 
-const entries = await contentfulClient.getEntries<BlogPost>({
+const posts = await contentfulClient.getEntries<BlogPost>({
 	content_type: 'blogPost',
 })
 
-const publishedPosts = entries.items.map((item) => {
+const publishedPosts = posts.items.map((item) => {
 	const { title, date, description, slug } = item.fields
 	return {
 		title,
@@ -23,13 +23,21 @@ const publishedPosts = entries.items.map((item) => {
 		date: new Date(date),
 	}
 })
+
+const currentBook = await contentfulClient.getEntries({
+	content_type: 'book',
+	limit: 1,
+	'fields.enabled': true,
+})
+
+const bookUrl = currentBook.items[0]?.fields.url as string
 ---
 
 <Layout title='Brenden Ehlers'>
 	<main class='flex flex-col gap-20'>
 		<article class='flex flex-col gap-8'>
 			<h1 class='text-3xl'>Hi, I'm {presentation.name}</h1>
-			<p class='max-w-[60ch] leading-6'>
+			<p class='w-full leading-6 md:max-w-[60ch]'>
 				I'm a Full-Stack Software Developer based in Denver, Colorado. My
 				expertise spans Java, TypeScript, and React, which I use to craft sleek
 				web solutions. With hands-on experience in Supabase and AWS, I offer a
@@ -37,62 +45,70 @@ const publishedPosts = entries.items.map((item) => {
 				project. Let's explore the realm of software craftsmanship together.
 			</p>
 			<SocialLinks />
-		</article>
+			{
+				bookUrl && (
+					<article class='flex flex-col gap-4'>
+						<h2 class='text-2xl font-bold'>Currently Reading</h2>
+						<CurrentlyReadingCard url={bookUrl} />
+					</article>
+				)
+			}
 
-		{
-			projects.length > 0 && (
-				<article class='flex flex-col gap-8'>
-					<header class='flex w-full flex-row justify-between gap-2'>
-						<h2 class='text-2xl font-bold'>Projects</h2>
-					</header>
+			{
+				projects.length > 0 && (
+					<article class='flex flex-col gap-4'>
+						<header class='flex w-full flex-row justify-between gap-2'>
+							<h2 class='text-2xl font-bold'>Projects</h2>
+						</header>
 
-					<section class='flex flex-col gap-4'>
-						{projects.length !== 0 &&
-							projects.map((project) => <ProjectCard {...project} />)}
-					</section>
-				</article>
-			)
-		}
+						<section class='flex flex-col gap-4'>
+							{projects.length !== 0 &&
+								projects.map((project) => <ProjectCard {...project} />)}
+						</section>
+					</article>
+				)
+			}
 
-		{
-			publishedPosts.length > 0 && (
-				<article class='flex flex-col gap-8'>
-					<header class='flex w-full flex-row justify-between gap-2'>
-						<h2 class='text-2xl font-bold'>Latest posts</h2>
-						<Link
-							href='/posts'
-							label='See all posts'
-							isUnderline
-							target='_self'
-						/>
-					</header>
-
-					<section class='flex flex-col gap-4'>
-						{publishedPosts.slice(0, 2).map((post) => (
-							<PostCard
-								date={post.date}
-								title={post.title}
-								description={post.description}
-								slug={post.slug}
+			{
+				publishedPosts.length > 0 && (
+					<article class='flex flex-col gap-4'>
+						<header class='flex w-full flex-row justify-between gap-2'>
+							<h2 class='text-2xl font-bold'>Latest posts</h2>
+							<Link
+								href='/posts'
+								label='See all posts'
+								isUnderline
+								target='_self'
 							/>
-						))}
-					</section>
-				</article>
-			)
-		}
+						</header>
 
-		<article class='flex flex-col gap-8'>
-			<header class='flex w-full flex-row justify-between gap-2'>
-				<h3 class='text-2xl font-bold'>Get in touch</h3>
-			</header>
-			<p>
-				Email me at <Link
-					href={`mailto:${presentation.mail}`}
-					label={presentation.mail}
-				/> or follow me via my social links.
-			</p>
+						<section class='flex flex-col gap-4'>
+							{publishedPosts.slice(0, 2).map((post) => (
+								<PostCard
+									date={post.date}
+									title={post.title}
+									description={post.description}
+									slug={post.slug}
+								/>
+							))}
+						</section>
+					</article>
+				)
+			}
 
-			<SocialLinks />
+			<article class='flex flex-col gap-8'>
+				<header class='flex w-full flex-row justify-between gap-2'>
+					<h3 class='text-2xl font-bold'>Get in touch</h3>
+				</header>
+				<p>
+					Email me at <Link
+						href={`mailto:${presentation.mail}`}
+						label={presentation.mail}
+					/> or follow me via my social links.
+				</p>
+
+				<SocialLinks />
+			</article>
 		</article>
 	</main>
 </Layout>
